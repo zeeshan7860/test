@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .basic{
+            margin-bottom: 15px;
+        }
+        .bg-warning{
+            background-color: rgb(255, 125, 125);
+        }
+        .bg-green{
+            background-color: rgb(12, 255, 12);
+        }
+        .del{
+            cursor: pointer;
+            border: 1px solid #000;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row align-content-center justify-content-center " style="height: 100vh;" >
+        <div class="col-md-8 bg-warning " style="border-radius: 10px;">
+        <div class="form-group pt-4 w-50 m-auto">
+            <input type="text" class="form-control form-control-lg basic"  id="nme" placeholder="Name here.........">
+            <input type="text" class="form-control form-control-lg basic"  id="fnme" placeholder="Father Name here.........">
+            <input type="text" class="form-control form-control-lg basic"  id="addres" placeholder="Addres here.........">
+            <select name="" id="cls" class="form-control form-control-lg basic">
+                <option value="CIT">CIT</option>
+                <option value="SEO">SEO</option>
+                <option value="EEM">EEM</option>
+                <option value="Data Management">Data Management</option>
+            </select>
+            <button class="btn btn-outline-danger btn-lg basic" id="sve">Save</button>
+            
+        </div>
+        <table class="table table-striped table-hover" id="my_list">
+            
+            <thead class="bg-green">
+                <tr>
+                    <th>#</th>
+                    <th>Student Name</th>
+                    <th>Father Name</th>
+                    <th>Address</th>
+                    <th>Class</th>
+                    <th>Delete</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <td>Ali Hader</td>
+                    <td>M.lateef</td>
+                    <td>Gulsham Fatima Okara</td>
+                    <td>CIT</td>
+                    <td class="del" onclick='delTr(this)'>Del</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
+   <script src="js/jquery.js"></script>
+   <script type="text/javascript">
+    $(function(){
+        $('#sve').click(function(){
+            var n=$('#nme').val();
+            var f=$('#fnme').val();
+            var a=$('#addres').val();
+            var c=$('#cls').val();
+
+            var mylen=$('table tbody tr').length;
+            if (n.length==0 ||  f.length==0 || a.length==0){
+                alert("Some information is missing.")
+                console.log(n.length);
+                return;
+            }
+            var mytr="<tr>";
+            mytr+="<th>"+parseInt(mylen+1)+"</th>";
+            mytr+="<td>"+n+"</td>";
+            mytr+="<td>"+f+"</td>";
+            mytr+="<td>"+a+"</td>";
+            mytr+="<td>"+c+"</td>";
+            mytr+="<td class='del' onclick='delTr(this)'>Del</td>"     
+            mytr+="</tr>";
+            $("table tbody ").append(mytr);
+
+            upCaption();
+            $('#nme').val();
+            $('#fnme').val();
+            $('#addres').val();
+            $('#cls').val();
+
+            // $("table tbody").append(mytr);
+            // var mycaption="<caption>"+"Total Rows in Table"+ parseInt(mylen+1)+"</caption>";
+            // $('table').append(mycaption);
+        })
+    })
+
+    function upCaption(){
+            var len=$('table tbody tr').length;
+            var str="Total Rows in Table " + len;
+            $("caption").text(str);
+        }
+        function delTr(t){
+            x=t.parentElement;
+            x.remove();
+            alert("Row removed successfully.");
+            upCaption();
+        }
+</script>
+    
+    
+</body>
+</html>
